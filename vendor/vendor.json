@@ -27,28 +27,10 @@
 			"revisionTime": "2016-05-20T23:26:10Z"
 		},
 		{
-			"checksumSHA1": "cdOCt0Yb+hdErz8NAQqayxPmRsY=",
-			"path": "github.com/hashicorp/errwrap",
-			"revision": "7554cd9344cec97297fa6649b055a8c98c2a1e55",
-			"revisionTime": "2014-10-28T05:47:10Z"
-		},
-		{
 			"checksumSHA1": "TNlVzNR1OaajcNi3CbQ3bGbaLGU=",
 			"path": "github.com/hashicorp/go-msgpack/codec",
 			"revision": "fa3f63826f7c23912c15263591e65d54d080b458",
 			"revisionTime": "2015-05-18T23:42:57Z"
-		},
-		{
-			"checksumSHA1": "lrSl49G23l6NhfilxPM0XFs5rZo=",
-			"path": "github.com/hashicorp/go-multierror",
-			"revision": "d30f09973e19c1dfcd120b2d9c4f168e68d6b5d5",
-			"revisionTime": "2015-09-16T20:57:42Z"
-		},
-		{
-			"checksumSHA1": "J47ySO1q0gcnmoMnir1q1loKzCk=",
-			"path": "github.com/hashicorp/go-sockaddr",
-			"revision": "6d291a969b86c4b633730bfc6b8b9d64c3aafed9",
-			"revisionTime": "2018-03-20T11:50:54Z"
 		},
 		{
 			"checksumSHA1": "xZ7Ban1x//6uUIU1xtrTbCYNHBc=",
@@ -87,12 +69,6 @@
 			"revisionTime": "2015-12-06T04:24:12Z"
 		},
 		{
-			"checksumSHA1": "Lm9qPECkL3yJ2pleU+Lzjlr29e0=",
-			"path": "github.com/hashicorp/memberlist",
-			"revision": "3d8438da9589e7b608a83ffac1ef8211486bcb7c",
-			"revisionTime": "2017-12-01T18:43:01Z"
-		},
-		{
 			"checksumSHA1": "xZuhljnmBysJPta/lMyYmJdujCg=",
 			"path": "github.com/mattn/go-isatty",
 			"revision": "66b8e73f3f5cda9f96b69efd03dd3d7fc4a5cdb8",
@@ -121,12 +97,6 @@
 			"path": "github.com/ryanuber/columnize",
 			"revision": "9b3edd62028f107d7cabb19353292afd29311a4e",
 			"revisionTime": "2016-07-12T16:32:29Z"
-		},
-		{
-			"checksumSHA1": "A/YUMbGg1LHIeK2+NLZBt+MIAao=",
-			"path": "github.com/sean-/seed",
-			"revision": "3c72d44db0c567f7c901f9c5da5fe68392227750",
-			"revisionTime": "2017-02-08T16:47:21Z"
 		},
 		{
 			"path": "golang.org/x/sys/unix",

@@ -69,6 +69,8 @@ type Config struct {
 	// port will be used.
 	BindAddr string `mapstructure:"bind"`
 
+	TCPListener net.Listener
+
 	// AdvertiseAddr is the address that the Serf agent will advertise to
 	// other members of the cluster. Can be used for basic NAT traversal
 	// where both the internal ip:port and external ip:port are known.

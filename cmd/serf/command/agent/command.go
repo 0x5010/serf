@@ -304,6 +304,7 @@ func (c *Command) setupAgent(config *Config, logOutput io.Writer) *Agent {
 
 	serfConfig.MemberlistConfig.BindAddr = bindIP
 	serfConfig.MemberlistConfig.BindPort = bindPort
+	serfConfig.MemberlistConfig.TCPListener = config.TCPListener
 	serfConfig.MemberlistConfig.AdvertiseAddr = advertiseIP
 	serfConfig.MemberlistConfig.AdvertisePort = advertisePort
 	serfConfig.MemberlistConfig.SecretKey = encryptKey
@@ -509,6 +510,14 @@ func (c *Command) retryJoin(config *Config, agent *Agent, errCh chan struct{}) {
 }
 
 func (c *Command) Run(args []string) int {
+	config := c.readConfig()
+	if config == nil {
+		return 1
+	}
+	return c.RunAgent(args, config)
+}
+
+func (c *Command) RunAgent(args []string, config *Config) int {
 	c.Ui = &cli.PrefixedUi{
 		OutputPrefix: "==> ",
 		InfoPrefix:   "    ",
@@ -518,10 +527,6 @@ func (c *Command) Run(args []string) int {
 
 	// Parse our configs
 	c.args = args
-	config := c.readConfig()
-	if config == nil {
-		return 1
-	}
 
 	// Setup the log outputs
 	logGate, logWriter, logOutput := c.setupLoggers(config)

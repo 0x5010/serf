@@ -510,14 +510,10 @@ func (c *Command) retryJoin(config *Config, agent *Agent, errCh chan struct{}) {
 }
 
 func (c *Command) Run(args []string) int {
-	config := c.readConfig()
-	if config == nil {
-		return 1
-	}
-	return c.RunAgent(args, config)
+	return c.RunAgent(args, nil)
 }
 
-func (c *Command) RunAgent(args []string, config *Config) int {
+func (c *Command) RunAgent(args []string, lis net.Listener) int {
 	c.Ui = &cli.PrefixedUi{
 		OutputPrefix: "==> ",
 		InfoPrefix:   "    ",
@@ -527,6 +523,10 @@ func (c *Command) RunAgent(args []string, config *Config) int {
 
 	// Parse our configs
 	c.args = args
+	config := c.readConfig()
+	if config == nil {
+		return 1
+	}
 
 	// Setup the log outputs
 	logGate, logWriter, logOutput := c.setupLoggers(config)

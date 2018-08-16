@@ -527,6 +527,7 @@ func (c *Command) RunAgent(args []string, lis net.Listener) int {
 	if config == nil {
 		return 1
 	}
+	config.TCPListener = lis
 
 	// Setup the log outputs
 	logGate, logWriter, logOutput := c.setupLoggers(config)

@@ -35,6 +35,7 @@ func DefaultConfig() *Config {
 		SyslogFacility:         "LOCAL0",
 		QueryResponseSizeLimit: 1024,
 		QuerySizeLimit:         1024,
+		EventSizeLimit:         1100,
 		BroadcastTimeout:       5 * time.Second,
 	}
 }
@@ -115,6 +116,8 @@ type Config struct {
 	// configuration.
 	QueryResponseSizeLimit int `mapstructure:"query_response_size_limit"`
 	QuerySizeLimit         int `mapstructure:"query_size_limit"`
+
+	EventSizeLimit int `mapstructure:"event_size_limit"`
 
 	// StartJoin is a list of addresses to attempt to join when the
 	// agent starts. If Serf is unable to communicate with any of these
@@ -460,6 +463,9 @@ func MergeConfig(a, b *Config) *Config {
 	}
 	if b.QuerySizeLimit != 0 {
 		result.QuerySizeLimit = b.QuerySizeLimit
+	}
+	if b.EventSizeLimit != 0 {
+		result.EventSizeLimit = b.EventSizeLimit
 	}
 	if b.BroadcastTimeout != 0 {
 		result.BroadcastTimeout = b.BroadcastTimeout

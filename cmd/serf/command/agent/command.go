@@ -391,9 +391,9 @@ func (c *Command) setupLoggers(config *Config) (*GatedWriter, *logWriter, io.Wri
 	return logGate, logWriter, logOutput
 }
 
-// startAgent is used to start the agent and IPC
+// startAgent is used to start the agent and IP
 func (c *Command) startAgent(config *Config, agent *Agent,
-	logWriter *logWriter, logOutput io.Writer) *AgentIPC {
+	logWriter *logWriter, logOutput io.Writer, eventHandlers ...EventHandler) *AgentIPC {
 	// Add the script event handlers
 	c.scriptHandler = &ScriptEventHandler{
 		SelfFunc: func() serf.Member { return agent.Serf().LocalMember() },
@@ -401,6 +401,9 @@ func (c *Command) startAgent(config *Config, agent *Agent,
 		Logger:   log.New(logOutput, "", log.LstdFlags),
 	}
 	agent.RegisterEventHandler(c.scriptHandler)
+	for _, eventHandler := range eventHandlers {
+		agent.RegisterEventHandler(eventHandler)
+	}
 
 	// Start the agent after the handler is registered
 	if err := agent.Start(); err != nil {
@@ -514,7 +517,7 @@ func (c *Command) Run(args []string) int {
 	return c.RunAgent(args, nil)
 }
 
-func (c *Command) RunAgent(args []string, lis net.Listener) int {
+func (c *Command) RunAgent(args []string, lis net.Listener, eventHandlers ...EventHandler) int {
 	c.Ui = &cli.PrefixedUi{
 		OutputPrefix: "==> ",
 		InfoPrefix:   "    ",
@@ -583,7 +586,7 @@ func (c *Command) RunAgent(args []string, lis net.Listener) int {
 	defer agent.Shutdown()
 
 	// Start the agent
-	ipc := c.startAgent(config, agent, logWriter, logOutput)
+	ipc := c.startAgent(config, agent, logWriter, logOutput, eventHandlers...)
 	if ipc == nil {
 		return 1
 	}

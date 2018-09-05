@@ -514,10 +514,6 @@ func (c *Command) retryJoin(config *Config, agent *Agent, errCh chan struct{}) {
 }
 
 func (c *Command) Run(args []string) int {
-	return c.RunAgent(args, nil)
-}
-
-func (c *Command) RunAgent(args []string, lis net.Listener, eventHandlers ...EventHandler) int {
 	c.Ui = &cli.PrefixedUi{
 		OutputPrefix: "==> ",
 		InfoPrefix:   "    ",
@@ -531,8 +527,10 @@ func (c *Command) RunAgent(args []string, lis net.Listener, eventHandlers ...Eve
 	if config == nil {
 		return 1
 	}
-	config.TCPListener = lis
+	return c.RunAgent(config)
+}
 
+func (c *Command) RunAgent(config *Config, eventHandlers ...EventHandler) int {
 	// Setup the log outputs
 	logGate, logWriter, logOutput := c.setupLoggers(config)
 	if logWriter == nil {
